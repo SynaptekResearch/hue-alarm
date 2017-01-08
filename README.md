@@ -37,6 +37,12 @@ Using `crontab -e`, add an entry:
 * *    *   *   *     /hue-alarm/hue-alarm --config /hue-alarm/settings.json --delay 5 --runs 12 > /hue-alarm/alarm.log
 ```
 
+## Create an alarm from HUE app
+
+Open the Philips HUE app and go to "Routines" -> "My routines" and add a routine with the configured trigger word in it. See `Configuration -> triggerOnSchedulePart`.
+
+If the routine containing the trigger word is enabled, the cron job will trigger the configured HTTP endpoint when any sensor returns movement.
+
 # Commandline options
 
 ```
