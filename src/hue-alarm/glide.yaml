@@ -1,0 +1,26 @@
+package: hue-alarm
+import:
+- package: github.com/cpo/go-hue
+- package: github.com/huin/goutil
+  subpackages:
+  - codegen
+- package: github.com/jingweno/gotask
+  subpackages:
+  - tasking
+- package: go4.org
+  subpackages:
+  - syncutil/singleflight
+- package: golang.org/x/crypto
+  subpackages:
+  - acme/autocert
+  - ssh/terminal
+- package: golang.org/x/oauth2
+  subpackages:
+  - google
+- package: golang.org/x/tools
+  subpackages:
+  - go/buildutil
+  - go/loader
+- package: google.golang.org/api
+  subpackages:
+  - compute/v1

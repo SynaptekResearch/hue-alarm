@@ -1,0 +1,42 @@
+hash: 9c176e551b191d3b2eac43387234fb24891b6682300cbdf0a2abdf95360d45c3
+updated: 2017-01-08T14:16:56.40872927+01:00
+imports:
+- name: github.com/cpo/go-hue
+  version: 63952c02d1a4379129ecdaf277528c43e2cb46d7
+  subpackages:
+  - configuration
+  - hue
+  - portal
+  - schedules
+  - sensors
+- name: github.com/huin/goutil
+  version: 916ad0fc94ef98c72b3637cb7c31b80765c74200
+  subpackages:
+  - codegen
+- name: github.com/jingweno/gotask
+  version: 104f8017a5972e8175597652dcf5a730d686b6aa
+  subpackages:
+  - tasking
+- name: go4.org
+  version: 09d86de304dc27e636298361bbfee4ac6ab04f21
+  subpackages:
+  - syncutil/singleflight
+- name: golang.org/x/crypto
+  version: 3f77d695175f990a2967385c493939f380ee40a3
+  subpackages:
+  - acme/autocert
+  - ssh/terminal
+- name: golang.org/x/oauth2
+  version: 314dd2c0bf3ebd592ec0d20847d27e79d0dbe8dd
+  subpackages:
+  - google
+- name: golang.org/x/tools
+  version: 908849c3379245f71612058fbf92cf6bf58c3c75
+  subpackages:
+  - go/buildutil
+  - go/loader
+- name: google.golang.org/api
+  version: 55146ba61254fdb1c26d65ff3c04bc1611ad73fb
+  subpackages:
+  - compute/v1
+testImports: []
