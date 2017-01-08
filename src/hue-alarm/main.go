@@ -104,7 +104,10 @@ func main() {
 
 	snsrs := sensors.New(p[0].InternalIPAddress, settings.UserName)
 
-	for run := 0; run < runs; run++ {
+	fmt.Printf("ALARM enabled: %t\n", alarmEnabled)
+	tripped := false
+
+	for run := 0; alarmEnabled && run < runs; run++ {
 		s, err := snsrs.GetAllSensors()
 		if err != nil {
 			panic(err)
@@ -122,7 +125,6 @@ func main() {
 			}
 		}
 
-		fmt.Printf("ALARM enabled: %t\n", alarmEnabled)
 		fmt.Printf("ALARM trigger: %t\n", alarmTrigger)
 
 		if settings.TestMode || (alarmEnabled && alarmTrigger) {
@@ -130,7 +132,7 @@ func main() {
 			if strings.Contains(getURL, "%s") {
 				getURL = fmt.Sprintf(settings.NotificationURL, url.QueryEscape(alarmSource))
 			}
-			if !settings.TestMode {
+			if !settings.TestMode && !tripped {
 				req, err := http.NewRequest("GET", getURL, nil)
 				if err != nil {
 					panic(err)
@@ -140,6 +142,7 @@ func main() {
 				if err != nil {
 					panic(err)
 				}
+				tripped = true
 				defer response.Body.Close()
 			} else {
 				fmt.Printf("TEST MODE enabled: %s\n", getURL)

@@ -36,11 +36,15 @@ Using `crontab -e`, add an entry:
 ```
 Usage of ./hue-alarm:
   -config string
-    	--config settings.json (default "settings.json")
+    	-config settings.json (default "settings.json")
+  -delay int
+    	-delay 5 (default 5)
   -dumpsensordata
-    	--dumpsensordata
+    	-dumpsensordata
   -init
-    	--init
+    	-init
+  -runs int
+    	-runs 1 (default 1)
 ```
 
 ## --config
@@ -54,6 +58,22 @@ Dumps the sensor data (for debugging purposes).
 ## --init
 
 Connect to the HUE bridge and obtain a username. This username should be set in the `configuration file`.
+
+## --runs
+
+The number of times to query the sensors
+
+## --delay
+
+The number of seconds to delay before running again. Try not to oversaturate the HUE bridge by setting this too low. The bridge may become unresponsive or 
+slow for light button events. 
+
+Also, try to balance the runs * delay to match your crontab entry.
+
+For example: 
+
+If cron runs every 60 seconds, setting runs to 6 and delay to 10 results in 6 requests per minute.
+
 
 # Configuration
 ```
