@@ -28,7 +28,7 @@ Using VI or NANO, create an initial configuration file. See `Configuration` for 
 Using `crontab -e`, add an entry:
 
 ```
-* *    *   *   *     /hue-alarm/hue-alarm --config /hue-alarm/settings.json > /hue-alarm/alarm.log
+* *    *   *   *     /hue-alarm/hue-alarm --config /hue-alarm/settings.json --delay 5 --runs 12 > /hue-alarm/alarm.log
 ```
 
 # Commandline options
