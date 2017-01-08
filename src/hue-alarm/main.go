@@ -6,6 +6,7 @@ import (
 	"fmt"
 	"io/ioutil"
 	"os"
+	"time"
 
 	"strings"
 
@@ -37,7 +38,7 @@ func initializeUser() {
 		panic(err)
 	}
 	c := configuration.New(p[0].InternalIPAddress)
-	response, err := c.CreateUser("Chris-Test", "Monitor")
+	response, err := c.CreateUser("HueAlarm", "Monitor")
 	if err != nil {
 		panic(err)
 	}
@@ -50,10 +51,14 @@ func main() {
 	configName := "settings.json"
 	dumpSensors := false
 	initMode := false
+	runs := 1
+	delay := 0
 
-	flag.StringVar(&configName, "config", "settings.json", "--config settings.json")
-	flag.BoolVar(&dumpSensors, "dumpsensordata", false, "--dumpsensordata")
-	flag.BoolVar(&initMode, "init", false, "--init")
+	flag.StringVar(&configName, "config", "settings.json", "-config settings.json")
+	flag.BoolVar(&dumpSensors, "dumpsensordata", false, "-dumpsensordata")
+	flag.BoolVar(&initMode, "init", false, "-init")
+	flag.IntVar(&runs, "runs", 1, "-runs 1")
+	flag.IntVar(&delay, "delay", 5, "-delay 5")
 	flag.Parse()
 
 	if initMode {
@@ -98,45 +103,50 @@ func main() {
 	}
 
 	snsrs := sensors.New(p[0].InternalIPAddress, settings.UserName)
-	s, err := snsrs.GetAllSensors()
-	if err != nil {
-		panic(err)
-	}
 
-	alarmTrigger := false
-	alarmSource := ""
-	for si := range s {
-		if s[si].Type == "ZLLPresence" && s[si].State.Presence {
-			alarmTrigger = true
-			alarmSource = s[si].Name
+	for run := 0; run < runs; run++ {
+		s, err := snsrs.GetAllSensors()
+		if err != nil {
+			panic(err)
 		}
-		if dumpSensors {
-			fmt.Printf("Sensor %d %s model %s\n============================\n%s\n", s[si].ID, s[si].Name, s[si].Type, s[si].String())
-		}
-	}
 
-	fmt.Printf("ALARM enabled: %t\n", alarmEnabled)
-	fmt.Printf("ALARM trigger: %t\n", alarmTrigger)
-
-	if settings.TestMode || (alarmEnabled && alarmTrigger) {
-		getURL := settings.NotificationURL
-		if strings.Contains(getURL, "%s") {
-			getURL = fmt.Sprintf(settings.NotificationURL, url.QueryEscape(alarmSource))
-		}
-		if !settings.TestMode {
-			req, err := http.NewRequest("GET", getURL, nil)
-			if err != nil {
-				panic(err)
+		alarmTrigger := false
+		alarmSource := ""
+		for si := range s {
+			if s[si].Type == "ZLLPresence" && s[si].State.Presence {
+				alarmTrigger = true
+				alarmSource = s[si].Name
 			}
-			client := http.Client{}
-			response, err := client.Do(req)
-			if err != nil {
-				panic(err)
+			if dumpSensors {
+				fmt.Printf("Sensor %d %s model %s\n============================\n%s\n", s[si].ID, s[si].Name, s[si].Type, s[si].String())
 			}
-			defer response.Body.Close()
-		} else {
-			fmt.Printf("TEST MODE enabled: %s\n", getURL)
 		}
+
+		fmt.Printf("ALARM enabled: %t\n", alarmEnabled)
+		fmt.Printf("ALARM trigger: %t\n", alarmTrigger)
+
+		if settings.TestMode || (alarmEnabled && alarmTrigger) {
+			getURL := settings.NotificationURL
+			if strings.Contains(getURL, "%s") {
+				getURL = fmt.Sprintf(settings.NotificationURL, url.QueryEscape(alarmSource))
+			}
+			if !settings.TestMode {
+				req, err := http.NewRequest("GET", getURL, nil)
+				if err != nil {
+					panic(err)
+				}
+				client := http.Client{}
+				response, err := client.Do(req)
+				if err != nil {
+					panic(err)
+				}
+				defer response.Body.Close()
+			} else {
+				fmt.Printf("TEST MODE enabled: %s\n", getURL)
+			}
+		}
+
+		time.Sleep(time.Second * time.Duration(delay))
 	}
 
 }
