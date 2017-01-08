@@ -11,6 +11,12 @@ I an willing to give support, but in a limited way. Issues with compilation / go
 Also: this package is delivered without guarantees; that means I am not liable for anything. So if your house burns down or your wife gets pregnant or 
 anything related to the use of this software: it's on you.
 
+# SMS providers
+
+Tested with (please provide additional tested providers):
+
+https://www.cmtelecom.com/
+
 # Setup guide
 
 ## Compile the binary
