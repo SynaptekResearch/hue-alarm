@@ -94,7 +94,7 @@ Also, try to balance the runs * delay to match your crontab entry.
 
 For example: 
 
-If cron runs every 60 seconds, setting runs to 6 and delay to 10 results in 6 requests per minute.
+If cron runs every 60 seconds, setting `runs` to 6 and `delay` to 10 results in 6 requests per minute.
 
 
 # Configuration
