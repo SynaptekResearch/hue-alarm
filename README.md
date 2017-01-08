@@ -7,11 +7,11 @@ http address. This can either be a SMS gateway or a HTTP push notification servi
 
 # Setup guide
 
-# Compile the binary
+## Compile the binary
 
 A standard git clone of this repository with go and glide installed (google that!) will build an ARM binary by default.
 
-# Install the binary
+## Install the binary
 
 I use a Beaglebone black to run this program. The platform is cheap, energy efficient and uses Linux.
 
@@ -19,11 +19,11 @@ It should also be possible to use another tiny linux platform like Raspberry PI.
 
 Use the `scp` command to install the binary to the beaglebone and ssh into the beaglebone.
 
-# Create an initial Configuration
+## Create an initial Configuration
 
 Using VI or NANO, create an initial configuration file. See `Configuration` for all settings.
 
-# Create cron entry
+## Create cron entry
 
 Using `crontab -e`, add an entry:
 
