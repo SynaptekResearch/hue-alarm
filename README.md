@@ -5,6 +5,12 @@ A simple SMS based alarm using HUE sensors.
 This project is a simple Philips HUE based alarm system. Whenever a HUE motion sensor is triggered, the application sends a GET request to a predefined 
 http address. This can either be a SMS gateway or a HTTP push notification service.
 
+# Support and liability
+
+I an willing to give support, but in a limited way. Issues with compilation / go / glide are specifically NOT supported. I presume you know what you are doing.
+Also: this package is delivered without guarantees; that means I am not liable for anything. So if your house burns down or your wife gets pregnant or 
+anything related to the use of this software: it's on you.
+
 # Setup guide
 
 ## Compile the binary
