@@ -17,6 +17,10 @@ Tested with (please provide additional tested providers):
 
 https://www.cmtelecom.com/
 
+# SMS alert apps
+
+You also need an app for alerting you (regardless of silence settings). SMS Alarm (android, https://play.google.com/store/apps/details?id=ax.ha.it.smsalarm) is a very nice and free one.
+
 # Setup guide
 
 ## Compile the binary
