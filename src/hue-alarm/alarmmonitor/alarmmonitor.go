@@ -112,8 +112,11 @@ func (m *AlarmMonitor) notifyAlarm(source string) {
 		onlyNotifyAfter = m.sts.LastNotified.Add(time.Duration(m.config.NotificationDelaySeconds) * time.Second)
 	}
 
-	if !m.tripped && time.Now().After(onlyNotifyAfter) {
+	timeoutPassed := time.Now().After(onlyNotifyAfter)
+	if !m.tripped && timeoutPassed {
+		fmt.Printf("Alarm tripped, sending notification.\n")
 		if m.config.TestMode {
+			fmt.Printf("Test mode, using e-mail.\n")
 			m.notify(source)
 		} else {
 			getURL := m.config.NotificationURL
@@ -134,12 +137,18 @@ func (m *AlarmMonitor) notifyAlarm(source string) {
 		now := time.Now()
 		m.sts.LastNotified = &now
 		m.tripped = true
+	} else {
+		fmt.Printf("Alarm tripped, NOT sending notification because tripped %t and/or timeoutPassed %t.\n", m.tripped, timeoutPassed)
 	}
 
 }
 
 // Run the main loop.
 func (m *AlarmMonitor) Run() {
+
+	if m.config.TestMode {
+		fmt.Printf("Running in test mode.\n")
+	}
 
 	p, err := portal.GetPortal()
 	if err != nil {
@@ -167,13 +176,14 @@ func (m *AlarmMonitor) Run() {
 		}
 	}
 
+	// state change, notify via e-mail
 	if m.sts.LastArmed != alarmEnabled {
 		enabledStr := "Disabled"
 		if alarmEnabled {
 			enabledStr = "Enabled"
 		}
 		notifyStr := "Alarm is now " + enabledStr
-		fmt.Printf("Notify '%s'\n", enabledStr)
+		fmt.Printf("State change,notify '%s'\n", enabledStr)
 		m.notify(notifyStr)
 	}
 

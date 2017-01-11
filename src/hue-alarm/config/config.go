@@ -35,7 +35,7 @@ func (s *State) String() string {
 	return fmt.Sprintf("Armed: %t", s.LastArmed)
 }
 
-// Read a configuration file.
+// ReadConfig reads a configuration file.
 func ReadConfig(name string, settings interface{}, create bool) {
 	settingsStr, err := ioutil.ReadFile(name)
 	if err != nil {
@@ -51,12 +51,12 @@ func ReadConfig(name string, settings interface{}, create bool) {
 	}
 }
 
+// WriteConfig writes a configuration file.
 func WriteConfig(name string, settings interface{}, create bool) {
 	settingsStr, err := json.Marshal(settings)
 	if err != nil {
 		panic(err)
 	}
-	fmt.Printf("Settings %s\n", settingsStr)
 	err = ioutil.WriteFile(name, settingsStr, os.ModePerm)
 	if err != nil {
 		panic(err)
