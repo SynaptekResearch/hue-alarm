@@ -29,3 +29,6 @@ src/hue-alarm/vendor
 /hue-alarm
 /bin
 /.vscode
+/settings.json
+/hue-alarm.*
+/state.json

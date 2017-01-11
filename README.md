@@ -103,7 +103,16 @@ If cron runs every 60 seconds, setting `runs` to 6 and `delay` to 10 results in 
   "notificationURL": "https://sgw01.cm.nl/gateway.ashx?producttoken=XXX-EDITED-OUT-XXX&body=%s&to=XXX-YOUR-PHONE-NUMBER-XXX&from=HUE&reference=HUE",
   "triggerOnSchedulePart": "(ALARM)",
   "testMode": false,
-  "userName": "XXX"
+  "userName": "XXX",
+  "notificationDelaySeconds": 300,
+  "statusMessages": {
+    "enabled": true,
+    "smtpServer": "smtp.gmail.com",
+    "smtpPort": 587,
+    "password": "xxxxx",
+    "from": "xxxx@gmail.com",
+    "to": "xxxx@notifire.com"
+  }
 }
 ```
 
@@ -123,4 +132,14 @@ Just print the URL used, regardless of active schedules and triggered sensors.
 ## userName
 
 The username which is known in your HUE bridge. Run the program using the `--init` parameter to obtain a username.
+
+## notificationDelaySeconds
+
+This setting determines how often an alarm will trigger the `notificationURL`. When an earlier request is triggered, this time should have passed before another 
+alarm request is triggered. This prevents your SMS balance to be drained too fast.
+
+## statusMessages
+
+Normal status messages (alarm ON, alarm OFF and running in `testMode`) will result in an e-mail being sent out. This e-mail can go to a normal e-mail 
+address or an email-to-sms gateway. That is up to you to decide. All the settings here are the settings for sending out an e-mail.
 

@@ -11,9 +11,18 @@ glide i
 echo = Compile
 cd ../..
 
-# Change GOOS and GOARCH to cross compile for other platforms!
-env GOOS=linux GOARCH=arm go build hue-alarm
+# This default target
+go build hue-alarm \
+  && mv hue-alarm hue-alarm.osx.x86 &
 
-# This will upload the ARM binary to my beaglebone. Change this!
-ssh root@192.168.1.175 -C mkdir /hue-alarm
-scp hue-alarm root@192.168.1.175:/hue-alarm/hue-alarm
+# Beaglebone and other ARM linux 
+env GOOS=linux GOARCH=arm go build hue-alarm \
+  && mv hue-alarm hue-alarm.linux.arm \
+  && ssh root@192.168.1.175 -C mkdir /hue-alarm \
+  || scp hue-alarm.linux.arm root@192.168.1.175:/hue-alarm/hue-alarm &
+
+# AMD64 linux systems
+env GOOS=linux GOARCH=amd64 go build hue-alarm \
+  && mv hue-alarm hue-alarm.linux.x86 &
+
+wait
