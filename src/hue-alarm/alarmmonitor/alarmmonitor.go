@@ -182,8 +182,11 @@ func (m *AlarmMonitor) Run() {
 		if alarmEnabled {
 			enabledStr = "Enabled"
 		}
-		notifyStr := "Alarm is now " + enabledStr
-		fmt.Printf("State change,notify '%s'\n", enabledStr)
+		notifyStr := fmt.Sprintf("Alarm is now %s", enabledStr)
+		if m.config.TestMode {
+			notifyStr += ", running in test mode."
+		}
+		fmt.Printf("State change, notifying '%s'\n", enabledStr)
 		m.notify(notifyStr)
 	}
 
