@@ -1,0 +1,387 @@
+<html>
+  <head>
+    <link rel="stylesheet" type="text/css" href="modules/semantic-ui/dist/semantic.min.css"></link>
+  </head>
+<body>
+  <div id="app" class="ui">
+    <div class="ui main text container">
+      <div class="ui middle aligned center aligned grid"><img src="logo.png" style="width: 300px;height: 60px;margin-top: 20px;"></div>
+    </div>
+    <div class="ui borderless main pointing menu">
+      <div class="ui text container">
+        <div href="#" class="header item">
+          {{ $t("message.name") }}
+        </div>
+        <router-link active-class="active" to="/" class="item" exact>{{ $t("message.menu_status") }}</a></router-link>
+        <router-link active-class="active" to="/config" class="item" exact>{{ $t("message.menu_configuration") }}</a></router-link>
+      </div>
+      <div class="ui borderless main pointing menu placeholder" style="display: none;">
+        <div class="ui text container">
+          <div href="#" class="header item">
+            {{ $t("message.name") }}
+          </div>
+          <router-link active-class="active" to="/" class="item" exact>{{ $t("message.menu_status") }}</a></router-link>
+          <router-link active-class="active" to="/config" class="item" exact>{{ $t("message.menu_configuration") }}</a></router-link>
+        </div>
+      </div>
+    </div>
+    <div class="ui container">
+      <router-view></router-view>
+    </div>
+  </div>
+  <div id="configTemplate" style="display:none">
+    <div class="one column row">
+      <form class="ui form" v-if="config && config.statusMessages">
+        <div class="ui two column row">
+          <div class="ui raised segment column">
+            <a class="ui green ribbon label">{{ $t("message.config_activation") }}</a>
+            <span></span>
+            <p></p>
+
+            <div class="field">
+              <label>
+                {{ $t("message.config_part_of_schedule_name") }}
+              </label>
+              <input type="text" v-model="config.triggerOnSchedulePart" placeholder="Keyword in schedule name">
+            </div>
+
+            <div class="field">
+              <label>
+                {{ $t("message.config_username") }}
+              </label>
+              <input type="text" v-model="config.userName" placeholder="HUE username">
+            </div>
+
+          </div>
+        </div>
+
+        <div class="ui raised segment">
+          <a class="ui green ribbon label">{{ $t("message.config_primary_notification_settings") }}</a>
+          <span></span>
+          <p></p>
+
+          <div class="field">
+            <label>
+              {{ $t("message.config_primary_notification_url") }}
+            </label>
+            <input v-model="config.notificationURL" placeholder="Notification GET URL">
+          </div>
+
+          <div class="field">
+            <label>
+              {{ $t("message.config_primary_notification_speed") }}
+            </label>
+             <input v-model.number="config.notificationDelaySeconds" placeholder="Notification minimum interleave in seconds">
+          </div>
+
+          <div class="field">
+            <label>
+              {{ $t("message.config_primary_notification_test_mode") }}
+            </label>
+            <input type="checkbox" v-model="config.testMode" >
+          </div>
+
+          <div class="field">
+            <button class="ui secondary button" v-on:click.stop="testnotification">{{ $t("message.config_primary_notification_test") }}</button>
+          </div>
+
+        </div>
+
+        <div class="ui raised segment">
+          <a class="ui green ribbon label">{{$t('message.config_secondary_notification_settings')}}</a>
+          <span></span>
+          <p></p>
+
+          <div class="field">
+            <label>
+              {{$t('message.enabled')}}
+            </label>
+            <input type="checkbox" v-model="config.statusMessages.enabled" >
+          </div>
+
+          <div class="field">
+            <label>
+              {{$t('message.config_from')}}
+            </label>
+            <input v-model="config.statusMessages.from" placeholder="Enter FROM mail address">
+          </div>
+
+          <div class="field">
+            <label>
+              {{$t('message.config_to')}}
+            </label>
+            <input v-model="config.statusMessages.to" placeholder="Enter TO mail address">
+          </div>
+
+          <div class="field">
+            <label>
+              {{$t('message.config_smtp_server_name')}} 
+            </label>
+            <input v-model="config.statusMessages.smtpServer" placeholder="Enter SMTP server name">
+          </div>
+
+          <div class="field">
+            <label>
+              {{$t('message.config_smtp_port')}} 
+            </label>
+             <input v-model.number="config.statusMessages.smtpPort" placeholder="Enter SMTP port number">
+          </div>
+
+          <div class="field">
+            <label>
+              {{$t('message.config_smtp_password')}} 
+            </label>
+             <input v-model="config.statusMessages.password" placeholder="Enter SMTP password">
+          </div>
+
+          <button class="ui primary button" v-on:click.stop="saveSettings">Save</button>
+          
+          <div class="ui info message" v-if="message">
+            <div class="header">
+              {{$t('message.config_message')}} 
+            </div>
+            <p>{{message}}</p>
+          </div>
+        </div>
+      </form>
+    </div>
+  </div>
+  
+  <div id="homeTemplate" style="display:none">
+    <div class="ui one column row">
+      <div class="ui raised segment column">
+        <a class="ui green ribbon label">Status</a>
+        <span></span>
+        <p></p>
+        
+        <div v-if="status.hasOwnProperty('status')" style="font-size: 10pt">
+          <span class="w2">Running: </span>
+          <strong v-if="status.running" style="color:green">Yes</strong>
+          <strong v-if="!status.running" style="color:red">No</strong><br/>
+          <span class="w2">Armed: </span>
+          <strong v-if="status.status.armed" style="color:green">Yes</strong>
+          <strong v-if="!status.status.armed" style="color:red">No</strong><br/>
+          <span class="w2">Last notified: </span><strong>{{status.status.lastNotified}}</strong><br/>
+        </div>
+
+        <div v-if="loading" class="ui loading button">...Loading...</div>
+      </div>
+      <div class="ui raised segment column">
+        <a class="ui green ribbon label">Software information</a>
+        <span></span>
+        <p></p>
+
+        <i>(c) Chris Polderman, GPL Licensed</i><br/>
+
+        See <a href="https://www.github.com/cpo/hue-alarm">https://www.github.com/cpo/hue-alarm</a> for documentation.<br/><br/>
+      </div>
+    </div>
+  </div>
+  <script src="modules/vue/dist/vue.js"></script>
+  <script src="modules/vue-router/dist/vue-router.js"></script>
+  <script src="modules/vue-i18n/dist/vue-i18n.js"></script>
+  <script src="modules/axios/dist/axios.js"></script>
+  <script src="modules/jquery/dist/jquery.min.js"></script>
+  <script src="modules/semantic-ui/dist/semantic.min.js"></script>
+  <script>
+
+    $(document)
+      .ready(function() {
+
+        // fix main menu to page on passing
+        $('.main.menu').visibility({
+          type: 'fixed'
+        });
+        $('.overlay').visibility({
+          type: 'fixed',
+          offset: 80
+        });
+
+        // lazy load images
+        $('.image').visibility({
+          type: 'image',
+          transition: 'vertical flip in',
+          duration: 500
+        });
+
+        // show dropdown on hover
+        $('.main.menu .ui.dropdown').dropdown({
+          on: 'hover'
+        });
+      });
+  </script>
+
+  <script>
+    Vue.use(VueI18n);
+
+    Vue.config.lang = 'en';
+
+    var locales = {
+          en: {
+            message: {
+              name: 'HUE Alarm',
+              menu_status: 'Status',
+              menu_configuration: 'Configuration',
+              config_activation: 'Activation',
+              config_part_of_schedule_name: 'Trigger by part of schedule name',
+              config_username: 'HUE username',
+              config_primary_notification_settings: 'Primary notification settings',
+              config_primary_notification_url: 'Notification URL (GET)',
+              config_primary_notification_speed: 'Notification speed (seconds)',
+              config_primary_notification_test_mode: 'Test mode',
+              config_primary_notification_test: 'Test notification',
+              config_secondary_notification_settings: 'Secundary notification settings',
+              config_smtp_password: "SMTP password",
+              config_smtp_server_name: "SMTP server name",
+              config_smtp_port: "SMTP port",
+              config_from: "FROM email address",
+              config_to: "TO email address",
+              enabled: "Enabled",
+            }
+          },
+          nl: {
+            message: {
+              name: 'HUE Alarm',
+              menu_status: 'Status',
+              menu_configuration: 'Instellingen',
+              config_activation: 'Activering',
+              config_part_of_schedule_name: 'Activeer door woord in routine naam',
+              config_username: 'HUE gebruikersnaam',
+              config_primary_notification_settings: 'Hoofd notificatie instellingen',
+              config_primary_notification_url: 'Notificatie URL (GET)',
+              config_primary_notification_speed: 'Notification snelheid (seconden)',
+              config_primary_notification_test_mode: 'Test modus',
+              config_primary_notification_test: 'Test notificatie',
+              config_secondary_notification_settings: 'Secundaire notificatie instellingen',
+              config_smtp_password: 'SMTP wachtwoord',
+              config_smtp_server_name: "SMTP server naam",
+              config_smtp_port: "SMTP poort",
+              config_from: "FROM email adres",
+              config_to: "TO email adres",
+              enabled: "Enabled",
+            }
+          }
+        }
+
+    Object.keys(locales).forEach(function (lang) {
+      Vue.locale(lang, locales[lang])
+    });
+
+    var api = axios.create({
+      timeout: 5000,
+      headers: {
+        'Pragma': 'no-cache',
+        'Cache-Control': 'no-cache'
+      }
+    });
+
+    const Config = { 
+      template: '<configuration/>' 
+    };
+
+    var Home = {
+      template: '<home/>'
+    };
+
+    var data = {
+      config: {
+        statusMessages: {}
+      },
+      message: ''
+    };
+
+    // Configuration screen
+    Vue.component('configuration', {
+      template: '#configTemplate',
+      data: function() {
+        return data;
+      },
+      created: function () {
+        api
+          .get('/api/config')
+          .then(function (response) {
+            data.config = response.data;
+          })
+          .catch(function (err) {
+            console.log("Error accessing resource", err);
+          });
+      },
+      methods: {
+        testnotification: function() {
+          api
+            .post('/api/test-notify', {
+              URL: data.config.notificationURL
+            })
+            .then(function (response) {
+              data.message = response.data;
+            });
+        },
+        saveSettings: function() {
+          api
+            .post('/api/config', data.config)
+            .then(function (response) {
+              data.message = response.data;
+            });
+        }
+      }
+    });
+
+    var homeData = {
+      status: {},
+      loading: true
+    }
+
+    var timerId;
+
+    // Home screen
+    Vue.component('home', {
+      template: '#homeTemplate',
+      data: function() {
+        return homeData;
+      },
+      beforeMount: function() {
+        this.update();
+        timerId = setInterval(this.update,5000);
+      },
+      beforeDestroy: function() {
+        clearInterval(timerId);
+      },
+      methods: {
+        update: function() {
+            homeData.loading = true;
+            api
+              .get('/api/status')
+              .then(function (response) {
+                homeData.status = response.data;
+                homeData.loading = false;
+              })
+              .catch(function (err) {
+                console.log("Error accessing resource", err);
+                homeData.loading = false;
+              });
+          }
+      }
+    });
+
+    const routes = [
+      {'path':'/', 'component': Home},
+      {'path':'/config', 'component': Config}
+    ]
+
+    const router = new VueRouter({
+      routes 
+    })
+
+    // Main application
+    var app = new Vue({
+      router,
+      el: '#app'
+    });
+
+
+
+    
+
+  </script>
+</body>
+</html>

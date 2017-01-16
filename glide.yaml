@@ -1,0 +1,10 @@
+package: github.com/cpo/hue-alarm
+import:
+- package: github.com/cpo/go-hue
+  subpackages:
+  - configuration
+  - portal
+  - schedules
+  - sensors
+- package: github.com/labstack/echo
+  version: ^3.0.3

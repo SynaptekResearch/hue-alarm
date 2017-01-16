@@ -1,0 +1,19 @@
+{
+  "name": "hue-alarm",
+  "version": "1.0.0",
+  "description": "HUE based alarm system",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "axios": "^0.15.3",
+    "jquery": "^3.1.1",
+    "semantic-ui": "^2.2.7",
+    "vue": "^2.1.8",
+    "vue-i18n": "^4.10.0",
+    "vue-router": "^2.1.1"
+  }
+}

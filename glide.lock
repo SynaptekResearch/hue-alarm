@@ -1,0 +1,41 @@
+hash: 4d786328cdfe956fe54a2032a0b10cfe44e0dd205a45db68ab7b2740737f283c
+updated: 2017-01-15T13:48:39.237952463+01:00
+imports:
+- name: github.com/cpo/go-hue
+  version: 63952c02d1a4379129ecdaf277528c43e2cb46d7
+  subpackages:
+  - configuration
+  - hue
+  - portal
+  - schedules
+  - sensors
+- name: github.com/labstack/echo
+  version: 8d504c1b699c757b267255c53b3e5219f9974abc
+- name: github.com/labstack/gommon
+  version: 447fe7433567c785af957e549aadae2bf2000071
+  subpackages:
+  - color
+  - log
+- name: github.com/mattn/go-colorable
+  version: d228849504861217f796da67fae4f6e347643f15
+- name: github.com/mattn/go-isatty
+  version: 30a891c33c7cde7b02a981314b4228ec99380cca
+- name: github.com/tylerb/graceful
+  version: 4df1190835320af7076dfcf27b3d071fd3612caf
+- name: github.com/valyala/fasttemplate
+  version: 3b874956e03f1636d171bda64b130f9135f42cff
+- name: golang.org/x/crypto
+  version: 3f77d695175f990a2967385c493939f380ee40a3
+  subpackages:
+  - acme
+  - acme/autocert
+- name: golang.org/x/net
+  version: 9773060888fba93b172cedcd70127db1ab739bd1
+  subpackages:
+  - context
+  - context/ctxhttp
+- name: golang.org/x/sys
+  version: 478fcf54317e52ab69f40bb4c7a1520288d7f7ea
+  subpackages:
+  - unix
+testImports: []
