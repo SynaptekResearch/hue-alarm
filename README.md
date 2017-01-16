@@ -43,13 +43,10 @@ Unzip the artifacts in the directory where you place the binary with `tar zxvf a
 
 Using VI or NANO, create an initial configuration file. See `Configuration` for all settings.
 
-## Create cron entry
+## Create a start script
 
-Using `crontab -e`, add an entry:
-
-```
-* *    *   *   *     /hue-alarm/hue-alarm --config /hue-alarm/settings.json --delay 5 --runs 12 > /hue-alarm/alarm.log
-```
+Starting with version 2, the system is no longer cron driven. You can use an utility like "screen" to run the program in 
+the background, allowing you to disconnect.
 
 ## Create an alarm from HUE app
 
