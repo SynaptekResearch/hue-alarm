@@ -20,7 +20,8 @@
               <label>
                 {{ $t("message.config_username") }}
               </label>
-              <input type="text" v-model="config.userName" placeholder="HUE username">
+              <input v-if="visible" type="text" v-model="config.userName" placeholder="HUE username">
+              <input v-if="!visible" type="password" v-model="config.userName" placeholder="HUE username">
             </div>
 
           </div>
@@ -35,7 +36,8 @@
             <label>
               {{ $t("message.config_primary_notification_url") }}
             </label>
-            <input v-model="config.notificationURL" placeholder="Notification GET URL">
+            <input v-if="visible" v-model="config.notificationURL" placeholder="Notification GET URL">
+            <input v-if="!visible" type="password" v-model="config.notificationURL" placeholder="Notification GET URL">
           </div>
 
           <div class="field">
@@ -74,14 +76,17 @@
             <label>
               {{$t('message.config_from')}}
             </label>
-            <input v-model="config.statusMessages.from" placeholder="Enter FROM mail address">
+            <input v-if="visible" v-model="config.statusMessages.from" placeholder="Enter FROM mail address">
+            <input v-if="!visible" type="password" v-model="config.statusMessages.from" placeholder="Enter FROM mail address">
           </div>
 
           <div class="field">
             <label>
               {{$t('message.config_to')}}
             </label>
-            <input v-model="config.statusMessages.to" placeholder="Enter TO mail address">
+            <input v-if="visible" v-model="config.statusMessages.to" placeholder="Enter TO mail address">
+            <input v-if="!visible" type="password" v-model="config.statusMessages.to" placeholder="Enter TO mail address">
+
           </div>
 
           <div class="field">
@@ -102,11 +107,15 @@
             <label>
               {{$t('message.config_smtp_password')}} 
             </label>
-             <input v-model="config.statusMessages.password" placeholder="Enter SMTP password">
+             <input v-if="visible" v-model="config.statusMessages.password" placeholder="Enter SMTP password">
+             <input v-if="!visible" type="password" v-model="config.statusMessages.password" placeholder="Enter SMTP password">
           </div>
 
           <button class="ui primary button" v-on:click.stop="saveSettings">Save</button>
-          
+          <button v-on:click.stop="toggleVisible" class="circular ui icon button tiny" title="Show/Hide sensitive data" v-bind:class="{ active: visible }">
+            <i class="icon hide"></i>
+          </button>
+
           <div class="ui info message" v-if="message">
             <div class="header">
               {{$t('message.config_message')}} 
@@ -127,7 +136,8 @@ var data = {
   config: {
     statusMessages: {}
   },
-  message: ''
+  message: '',
+  visible: false
 };
 
 // Configuration screen
@@ -146,6 +156,9 @@ module.exports = Vue.component('configuration', {
       });
   },
   methods: {
+    toggleVisible: function() {
+      data.visible=!data.visible;
+    },
     testnotification: function() {
       api
         .post('/api/test-notify', {

@@ -24126,6 +24126,15 @@
 	//
 	//
 	//
+	//
+	//
+	//
+	//
+	//
+	//
+	//
+	//
+	//
 
 	var Vue = __webpack_require__(1);
 	var api = __webpack_require__(11);
@@ -24134,7 +24143,8 @@
 	  config: {
 	    statusMessages: {}
 	  },
-	  message: ''
+	  message: '',
+	  visible: false
 	};
 
 	// Configuration screen
@@ -24153,6 +24163,9 @@
 	      });
 	  },
 	  methods: {
+	    toggleVisible: function() {
+	      data.visible=!data.visible;
+	    },
 	    testnotification: function() {
 	      api
 	        .post('/api/test-notify', {
@@ -24212,7 +24225,7 @@
 	    }
 	  })]), _vm._v(" "), _c('div', {
 	    staticClass: "field"
-	  }, [_c('label', [_vm._v("\n              " + _vm._s(_vm.$t("message.config_username")) + "\n            ")]), _vm._v(" "), _c('input', {
+	  }, [_c('label', [_vm._v("\n              " + _vm._s(_vm.$t("message.config_username")) + "\n            ")]), _vm._v(" "), (_vm.visible) ? _c('input', {
 	    directives: [{
 	      name: "model",
 	      rawName: "v-model",
@@ -24232,13 +24245,33 @@
 	        _vm.config.userName = $event.target.value
 	      }
 	    }
-	  })])])]), _vm._v(" "), _c('div', {
+	  }) : _vm._e(), _vm._v(" "), (!_vm.visible) ? _c('input', {
+	    directives: [{
+	      name: "model",
+	      rawName: "v-model",
+	      value: (_vm.config.userName),
+	      expression: "config.userName"
+	    }],
+	    attrs: {
+	      "type": "password",
+	      "placeholder": "HUE username"
+	    },
+	    domProps: {
+	      "value": _vm._s(_vm.config.userName)
+	    },
+	    on: {
+	      "input": function($event) {
+	        if ($event.target.composing) { return; }
+	        _vm.config.userName = $event.target.value
+	      }
+	    }
+	  }) : _vm._e()])])]), _vm._v(" "), _c('div', {
 	    staticClass: "ui raised segment"
 	  }, [_c('a', {
 	    staticClass: "ui green ribbon label"
 	  }, [_vm._v(_vm._s(_vm.$t("message.config_primary_notification_settings")))]), _vm._v(" "), _c('span'), _vm._v(" "), _c('p'), _vm._v(" "), _c('div', {
 	    staticClass: "field"
-	  }, [_c('label', [_vm._v("\n            " + _vm._s(_vm.$t("message.config_primary_notification_url")) + "\n          ")]), _vm._v(" "), _c('input', {
+	  }, [_c('label', [_vm._v("\n            " + _vm._s(_vm.$t("message.config_primary_notification_url")) + "\n          ")]), _vm._v(" "), (_vm.visible) ? _c('input', {
 	    directives: [{
 	      name: "model",
 	      rawName: "v-model",
@@ -24257,7 +24290,27 @@
 	        _vm.config.notificationURL = $event.target.value
 	      }
 	    }
-	  })]), _vm._v(" "), _c('div', {
+	  }) : _vm._e(), _vm._v(" "), (!_vm.visible) ? _c('input', {
+	    directives: [{
+	      name: "model",
+	      rawName: "v-model",
+	      value: (_vm.config.notificationURL),
+	      expression: "config.notificationURL"
+	    }],
+	    attrs: {
+	      "type": "password",
+	      "placeholder": "Notification GET URL"
+	    },
+	    domProps: {
+	      "value": _vm._s(_vm.config.notificationURL)
+	    },
+	    on: {
+	      "input": function($event) {
+	        if ($event.target.composing) { return; }
+	        _vm.config.notificationURL = $event.target.value
+	      }
+	    }
+	  }) : _vm._e()]), _vm._v(" "), _c('div', {
 	    staticClass: "field"
 	  }, [_c('label', [_vm._v("\n            " + _vm._s(_vm.$t("message.config_primary_notification_speed")) + "\n          ")]), _vm._v(" "), _c('input', {
 	    directives: [{
@@ -24366,7 +24419,7 @@
 	    }
 	  })]), _vm._v(" "), _c('div', {
 	    staticClass: "field"
-	  }, [_c('label', [_vm._v("\n            " + _vm._s(_vm.$t('message.config_from')) + "\n          ")]), _vm._v(" "), _c('input', {
+	  }, [_c('label', [_vm._v("\n            " + _vm._s(_vm.$t('message.config_from')) + "\n          ")]), _vm._v(" "), (_vm.visible) ? _c('input', {
 	    directives: [{
 	      name: "model",
 	      rawName: "v-model",
@@ -24385,9 +24438,29 @@
 	        _vm.config.statusMessages.from = $event.target.value
 	      }
 	    }
-	  })]), _vm._v(" "), _c('div', {
+	  }) : _vm._e(), _vm._v(" "), (!_vm.visible) ? _c('input', {
+	    directives: [{
+	      name: "model",
+	      rawName: "v-model",
+	      value: (_vm.config.statusMessages.from),
+	      expression: "config.statusMessages.from"
+	    }],
+	    attrs: {
+	      "type": "password",
+	      "placeholder": "Enter FROM mail address"
+	    },
+	    domProps: {
+	      "value": _vm._s(_vm.config.statusMessages.from)
+	    },
+	    on: {
+	      "input": function($event) {
+	        if ($event.target.composing) { return; }
+	        _vm.config.statusMessages.from = $event.target.value
+	      }
+	    }
+	  }) : _vm._e()]), _vm._v(" "), _c('div', {
 	    staticClass: "field"
-	  }, [_c('label', [_vm._v("\n            " + _vm._s(_vm.$t('message.config_to')) + "\n          ")]), _vm._v(" "), _c('input', {
+	  }, [_c('label', [_vm._v("\n            " + _vm._s(_vm.$t('message.config_to')) + "\n          ")]), _vm._v(" "), (_vm.visible) ? _c('input', {
 	    directives: [{
 	      name: "model",
 	      rawName: "v-model",
@@ -24406,7 +24479,27 @@
 	        _vm.config.statusMessages.to = $event.target.value
 	      }
 	    }
-	  })]), _vm._v(" "), _c('div', {
+	  }) : _vm._e(), _vm._v(" "), (!_vm.visible) ? _c('input', {
+	    directives: [{
+	      name: "model",
+	      rawName: "v-model",
+	      value: (_vm.config.statusMessages.to),
+	      expression: "config.statusMessages.to"
+	    }],
+	    attrs: {
+	      "type": "password",
+	      "placeholder": "Enter TO mail address"
+	    },
+	    domProps: {
+	      "value": _vm._s(_vm.config.statusMessages.to)
+	    },
+	    on: {
+	      "input": function($event) {
+	        if ($event.target.composing) { return; }
+	        _vm.config.statusMessages.to = $event.target.value
+	      }
+	    }
+	  }) : _vm._e()]), _vm._v(" "), _c('div', {
 	    staticClass: "field"
 	  }, [_c('label', [_vm._v("\n            " + _vm._s(_vm.$t('message.config_smtp_server_name')) + " \n          ")]), _vm._v(" "), _c('input', {
 	    directives: [{
@@ -24456,7 +24549,7 @@
 	    }
 	  })]), _vm._v(" "), _c('div', {
 	    staticClass: "field"
-	  }, [_c('label', [_vm._v("\n            " + _vm._s(_vm.$t('message.config_smtp_password')) + " \n          ")]), _vm._v(" "), _c('input', {
+	  }, [_c('label', [_vm._v("\n            " + _vm._s(_vm.$t('message.config_smtp_password')) + " \n          ")]), _vm._v(" "), (_vm.visible) ? _c('input', {
 	    directives: [{
 	      name: "model",
 	      rawName: "v-model",
@@ -24475,7 +24568,27 @@
 	        _vm.config.statusMessages.password = $event.target.value
 	      }
 	    }
-	  })]), _vm._v(" "), _c('button', {
+	  }) : _vm._e(), _vm._v(" "), (!_vm.visible) ? _c('input', {
+	    directives: [{
+	      name: "model",
+	      rawName: "v-model",
+	      value: (_vm.config.statusMessages.password),
+	      expression: "config.statusMessages.password"
+	    }],
+	    attrs: {
+	      "type": "password",
+	      "placeholder": "Enter SMTP password"
+	    },
+	    domProps: {
+	      "value": _vm._s(_vm.config.statusMessages.password)
+	    },
+	    on: {
+	      "input": function($event) {
+	        if ($event.target.composing) { return; }
+	        _vm.config.statusMessages.password = $event.target.value
+	      }
+	    }
+	  }) : _vm._e()]), _vm._v(" "), _c('button', {
 	    staticClass: "ui primary button",
 	    on: {
 	      "click": function($event) {
@@ -24483,7 +24596,23 @@
 	        _vm.saveSettings($event)
 	      }
 	    }
-	  }, [_vm._v("Save")]), _vm._v(" "), (_vm.message) ? _c('div', {
+	  }, [_vm._v("Save")]), _vm._v(" "), _c('button', {
+	    staticClass: "circular ui icon button tiny",
+	    class: {
+	      active: _vm.visible
+	    },
+	    attrs: {
+	      "title": "Show/Hide sensitive data"
+	    },
+	    on: {
+	      "click": function($event) {
+	        $event.stopPropagation();
+	        _vm.toggleVisible($event)
+	      }
+	    }
+	  }, [_c('i', {
+	    staticClass: "icon hide"
+	  })]), _vm._v(" "), (_vm.message) ? _c('div', {
 	    staticClass: "ui info message"
 	  }, [_c('div', {
 	    staticClass: "header"
