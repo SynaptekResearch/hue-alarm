@@ -6,6 +6,8 @@ import (
 	"io/ioutil"
 	"os"
 	"time"
+
+	"github.com/cpo/hue-alarm/log"
 )
 
 type Config struct {
@@ -37,6 +39,7 @@ func (s *State) String() string {
 
 // ReadConfig reads a configuration file.
 func ReadConfig(name string, settings interface{}, create bool) {
+	log.Info.Println("Read config")
 	settingsStr, err := ioutil.ReadFile(name)
 	if err != nil {
 		if create {
@@ -53,6 +56,7 @@ func ReadConfig(name string, settings interface{}, create bool) {
 
 // WriteConfig writes a configuration file.
 func WriteConfig(name string, settings interface{}, create bool) {
+	log.Info.Println("Write config")
 	settingsStr, err := json.MarshalIndent(settings, "", "\t")
 	if err != nil {
 		panic(err)

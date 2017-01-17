@@ -2,13 +2,13 @@ package web
 
 import (
 	"fmt"
-	"log"
 	"net/http"
 	"net/url"
 	"strings"
 
 	"github.com/cpo/hue-alarm/alarmmonitor"
 	"github.com/cpo/hue-alarm/config"
+	"github.com/cpo/hue-alarm/log"
 	"github.com/labstack/echo"
 )
 
@@ -17,10 +17,12 @@ type webInterface struct {
 }
 
 func (w *webInterface) getConfig(c echo.Context) error {
+	log.Debug.Printf("API: GET config\n")
 	return c.JSON(200, w.AlarmMonitor.Config)
 }
 
 func (w *webInterface) postConfig(c echo.Context) error {
+	log.Debug.Printf("API: POST config\n")
 	c.Bind(&w.AlarmMonitor.Config)
 	// config.WriteConfig()
 	config.WriteConfig("settings.json", w.AlarmMonitor.Config, false)
@@ -29,6 +31,7 @@ func (w *webInterface) postConfig(c echo.Context) error {
 }
 
 func (w *webInterface) getStatus(c echo.Context) error {
+	log.Debug.Printf("API: GET status\n")
 	var status struct {
 		Running bool         `json:"running"`
 		Status  config.State `json:"status"`
@@ -39,12 +42,13 @@ func (w *webInterface) getStatus(c echo.Context) error {
 }
 
 func (w *webInterface) postTestNotification(c echo.Context) error {
+	log.Debug.Printf("API: POST testNotification\n")
 	var request struct {
 		URL string
 	}
 	err := c.Bind(&request)
 	if err != nil {
-		log.Printf("%s\n", err)
+		log.Debug.Printf("%s\n", err)
 		return c.String(400, "Error sending request to "+request.URL)
 	}
 
@@ -67,7 +71,9 @@ func (w *webInterface) postTestNotification(c echo.Context) error {
 
 // Start starts the web interface. Duh.
 func Start(monitor *alarmmonitor.AlarmMonitor) {
+	log.Info.Printf("Initializing API\n")
 	webiface := webInterface{monitor}
+
 	e := echo.New()
 	e.Static("/", "static")
 	e.Static("/modules", "node_modules")

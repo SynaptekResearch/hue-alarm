@@ -4,7 +4,6 @@ import (
 	"bufio"
 	"flag"
 	"fmt"
-	"log"
 	"os"
 	"strings"
 	"time"
@@ -21,6 +20,7 @@ import (
 	"github.com/cpo/go-hue/portal"
 	"github.com/cpo/go-hue/schedules"
 	"github.com/cpo/go-hue/sensors"
+	"github.com/cpo/hue-alarm/log"
 )
 
 // AlarmMonitor holds all the fields and methods for the HUE alarm.
@@ -92,7 +92,7 @@ func (m *AlarmMonitor) initializeUser() {
 		panic(err)
 	}
 	username := response[0].Success["username"].(string)
-	fmt.Printf("Your username is %s\n", username)
+	log.Info.Printf("Your username is %s\n", username)
 }
 
 // Send notification to configured address
@@ -109,7 +109,7 @@ func (m *AlarmMonitor) notify(status string) {
 		m.Config.StatusMessages.From, []string{m.Config.StatusMessages.To}, []byte(msg))
 
 	if err != nil {
-		log.Printf("smtp error: %s", err)
+		log.Info.Printf("smtp error: %s", err)
 		return
 	}
 }
@@ -123,9 +123,9 @@ func (m *AlarmMonitor) notifyAlarm(source string) {
 
 	timeoutPassed := time.Now().After(onlyNotifyAfter)
 	if !m.tripped && timeoutPassed {
-		fmt.Printf("Alarm tripped, sending notification.\n")
+		log.Info.Printf("Alarm tripped, sending notification.\n")
 		if m.Config.TestMode {
-			fmt.Printf("Test mode, using e-mail.\n")
+			log.Info.Printf("Test mode, using e-mail.\n")
 			m.notify(source)
 		} else {
 			getURL := m.Config.NotificationURL
@@ -148,7 +148,7 @@ func (m *AlarmMonitor) notifyAlarm(source string) {
 		config.WriteConfig("state.json", m.Status, true)
 		m.tripped = true
 	} else {
-		fmt.Printf("Alarm tripped, NOT sending notification because tripped %t and/or timeoutPassed %t.\n", m.tripped, timeoutPassed)
+		log.Info.Printf("Alarm tripped, NOT sending notification because tripped %t and/or timeoutPassed %t.\n", m.tripped, timeoutPassed)
 	}
 
 }
@@ -162,11 +162,11 @@ func (m *AlarmMonitor) Run() {
 	m.Running = true
 	defer m.Close()
 	for {
-		fmt.Printf("New run [testMode: %t]\n", m.Config.TestMode)
+		log.Info.Printf("New run [testMode: %t]\n", m.Config.TestMode)
 
 		p, err := portal.GetPortal()
 		if err != nil {
-			fmt.Printf("Error: %s\n", err)
+			log.Info.Printf("Error: %s\n", err)
 			continue
 		}
 
@@ -201,7 +201,7 @@ func (m *AlarmMonitor) Run() {
 			if m.Config.TestMode {
 				notifyStr += ", running in test mode."
 			}
-			fmt.Printf("State change, notifying '%s'\n", enabledStr)
+			log.Info.Printf("State change, notifying '%s'\n", enabledStr)
 			m.notify(notifyStr)
 			m.Status.LastArmed = m.alarmEnabled
 			config.WriteConfig("state.json", m.Status, true)
@@ -210,13 +210,13 @@ func (m *AlarmMonitor) Run() {
 		// process state
 		snsrs := sensors.New(p[0].InternalIPAddress, m.Config.UserName)
 
-		fmt.Printf("Alarm enabled %t\n", m.alarmEnabled)
+		log.Info.Printf("Alarm enabled %t\n", m.alarmEnabled)
 		m.tripped = false
 
 		for run := 0; m.alarmEnabled && run < m.runs && !m.reload; run++ {
 			s, err := snsrs.GetAllSensors()
 			if err != nil {
-				fmt.Printf("Error: %s\n", err)
+				log.Info.Printf("Error: %s\n", err)
 				continue
 			}
 
@@ -228,11 +228,11 @@ func (m *AlarmMonitor) Run() {
 					alarmSource = s[si].Name
 				}
 				if m.dumpSensors {
-					fmt.Printf("Sensor %d %s model %s\n============================\n%s\n", s[si].ID, s[si].Name, s[si].Type, s[si].String())
+					log.Info.Printf("Sensor %d %s model %s\n============================\n%s\n", s[si].ID, s[si].Name, s[si].Type, s[si].String())
 				}
 			}
 
-			fmt.Printf("ALARM trigger %t\n", alarmTrigger)
+			log.Info.Printf("ALARM trigger %t\n", alarmTrigger)
 
 			if m.alarmEnabled && alarmTrigger {
 				m.notifyAlarm(alarmSource)
@@ -242,7 +242,7 @@ func (m *AlarmMonitor) Run() {
 		}
 
 		if m.reload {
-			fmt.Printf("Reload finished\n")
+			log.Info.Printf("Reload finished\n")
 			m.reload = false
 
 		}
