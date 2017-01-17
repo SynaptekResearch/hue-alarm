@@ -8,6 +8,7 @@ export GOPATH=$ROOT
 glide i
 
 echo = Compile
+webpack --display-modules
 
 # This default target
 go build github.com/cpo/hue-alarm \
@@ -15,7 +16,8 @@ go build github.com/cpo/hue-alarm \
 
 if [ "$1" == "dist" ] ; then
   # generic static artifacts
-  tar czvf artifacts.tar.gz node_modules/vue-i18n/dist node_modules/semantic-ui/dist node_modules/vue/dist node_modules/vue-router/dist node_modules/axios/dist node_modules/jquery/dist static
+  rm artifacts.tar.gz
+  tar czvf artifacts.tar.gz static/index.html static/bundle.js static/logo.png node_modules/semantic-ui/dist/semantic.min.css 
 
   # Beaglebone and other ARM linux 
   env GOOS=linux GOARCH=arm go build github.com/cpo/hue-alarm \
