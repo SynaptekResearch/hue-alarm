@@ -55,7 +55,7 @@
           </div>
 
           <div class="field">
-            <button class="ui secondary button" v-on:click.stop="testnotification">{{ $t("message.config_primary_notification_test") }}</button>
+            <button class="ui secondary button" v-on:click.prevent="testnotification">{{ $t("message.config_primary_notification_test") }}</button>
           </div>
 
         </div>
@@ -111,8 +111,8 @@
              <input v-if="!visible" type="password" v-model="config.statusMessages.password" placeholder="Enter SMTP password">
           </div>
 
-          <button class="ui primary button" v-on:click.stop="saveSettings">Save</button>
-          <button v-on:click.stop="toggleVisible" class="circular ui icon button tiny" title="Show/Hide sensitive data" v-bind:class="{ active: visible }">
+          <button class="ui primary button" v-on:click.prevent="saveSettings">Save</button>
+          <button v-on:click.prevent="toggleVisible" class="circular ui icon button tiny" v-bind:class="{secondary: visible}" title="Show/Hide sensitive data">
             <i class="icon hide"></i>
           </button>
 

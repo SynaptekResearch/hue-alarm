@@ -73,7 +73,7 @@ func (m *AlarmMonitor) initialize() {
 }
 
 func (m *AlarmMonitor) Reload() {
-	fmt.Println("Reload requested...")
+	log.Info.Println("Reload requested...")
 	m.reload = true
 }
 

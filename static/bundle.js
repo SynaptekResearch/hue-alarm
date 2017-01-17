@@ -24376,7 +24376,7 @@
 	    staticClass: "ui secondary button",
 	    on: {
 	      "click": function($event) {
-	        $event.stopPropagation();
+	        $event.preventDefault();
 	        _vm.testnotification($event)
 	      }
 	    }
@@ -24592,21 +24592,21 @@
 	    staticClass: "ui primary button",
 	    on: {
 	      "click": function($event) {
-	        $event.stopPropagation();
+	        $event.preventDefault();
 	        _vm.saveSettings($event)
 	      }
 	    }
 	  }, [_vm._v("Save")]), _vm._v(" "), _c('button', {
 	    staticClass: "circular ui icon button tiny",
 	    class: {
-	      active: _vm.visible
+	      secondary: _vm.visible
 	    },
 	    attrs: {
 	      "title": "Show/Hide sensitive data"
 	    },
 	    on: {
 	      "click": function($event) {
-	        $event.stopPropagation();
+	        $event.preventDefault();
 	        _vm.toggleVisible($event)
 	      }
 	    }
