@@ -10,6 +10,7 @@ import (
 	"github.com/cpo/hue-alarm/config"
 	"github.com/cpo/hue-alarm/log"
 	"github.com/labstack/echo"
+	"github.com/labstack/echo/middleware"
 )
 
 type webInterface struct {
@@ -75,6 +76,19 @@ func Start(monitor *alarmmonitor.AlarmMonitor) {
 	webiface := webInterface{monitor}
 
 	e := echo.New()
+	e.Use(middleware.SecureWithConfig(middleware.SecureConfig{
+		XSSProtection:         "1; mode=block",
+		ContentTypeNosniff:    "nosniff",
+		XFrameOptions:         "SAMEORIGIN",
+		HSTSMaxAge:            3600,
+		ContentSecurityPolicy: "",
+	}))
+	e.Use(middleware.BasicAuth(func(username, password string) bool {
+		if username == monitor.Config.AdminUserName && password == monitor.Config.AdminPassword {
+			return true
+		}
+		return false
+	}))
 	e.Static("/", "static")
 	e.Static("/modules", "node_modules")
 	e.GET("/api/config", webiface.getConfig)

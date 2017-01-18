@@ -5,6 +5,30 @@
       <form class="ui form" v-if="config && config.statusMessages">
         <div class="ui two column row">
           <div class="ui raised segment column">
+            <a class="ui green ribbon label">{{ $t("message.config_administration") }}</a>
+            <span></span>
+            <p></p>
+
+            <div class="field">
+              <label>
+                {{ $t("message.config_admin_username") }}
+              </label>
+              <input type="text" v-model="config.adminUserName" placeholder="Keyword in schedule name">
+            </div>
+
+            <div class="field">
+              <label>
+                {{ $t("message.config_username") }}
+              </label>
+              <input v-if="visible" type="text" v-model="config.adminUserName" placeholder="HUE username">
+              <input v-if="!visible" type="password" v-model="config.adminPassword" placeholder="HUE username">
+            </div>
+
+          </div>
+        </div>
+
+        <div class="ui two column row">
+          <div class="ui raised segment column">
             <a class="ui green ribbon label">{{ $t("message.config_activation") }}</a>
             <span></span>
             <p></p>

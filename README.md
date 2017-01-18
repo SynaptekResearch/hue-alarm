@@ -113,7 +113,9 @@ If cron runs every 60 seconds, setting `runs` to 6 and `delay` to 10 results in 
     "password": "xxxxx",
     "from": "xxxx@gmail.com",
     "to": "xxxx@notifire.com"
-  }
+  },
+  "adminUserName": "admin",
+  "adminPassword": "!!CHANGEME!!",
 }
 ```
 
@@ -144,3 +146,6 @@ alarm request is triggered. This prevents your SMS balance to be drained too fas
 Normal status messages (alarm ON, alarm OFF and running in `testMode`) will result in an e-mail being sent out. This e-mail can go to a normal e-mail 
 address or an email-to-sms gateway. That is up to you to decide. All the settings here are the settings for sending out an e-mail.
 
+## adminUserName/adminPassword
+
+The credentials (uncoded!) of the admin user. Needed for viewing / changing data in the web interface.

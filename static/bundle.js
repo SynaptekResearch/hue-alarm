@@ -24135,6 +24135,30 @@
 	//
 	//
 	//
+	//
+	//
+	//
+	//
+	//
+	//
+	//
+	//
+	//
+	//
+	//
+	//
+	//
+	//
+	//
+	//
+	//
+	//
+	//
+	//
+	//
+	//
+	//
+	//
 
 	var Vue = __webpack_require__(1);
 	var api = __webpack_require__(11);
@@ -24196,6 +24220,76 @@
 	  }, [(_vm.config && _vm.config.statusMessages) ? _c('form', {
 	    staticClass: "ui form"
 	  }, [_c('div', {
+	    staticClass: "ui two column row"
+	  }, [_c('div', {
+	    staticClass: "ui raised segment column"
+	  }, [_c('a', {
+	    staticClass: "ui green ribbon label"
+	  }, [_vm._v(_vm._s(_vm.$t("message.config_administration")))]), _vm._v(" "), _c('span'), _vm._v(" "), _c('p'), _vm._v(" "), _c('div', {
+	    staticClass: "field"
+	  }, [_c('label', [_vm._v("\n              " + _vm._s(_vm.$t("message.config_admin_username")) + "\n            ")]), _vm._v(" "), _c('input', {
+	    directives: [{
+	      name: "model",
+	      rawName: "v-model",
+	      value: (_vm.config.adminUserName),
+	      expression: "config.adminUserName"
+	    }],
+	    attrs: {
+	      "type": "text",
+	      "placeholder": "Keyword in schedule name"
+	    },
+	    domProps: {
+	      "value": _vm._s(_vm.config.adminUserName)
+	    },
+	    on: {
+	      "input": function($event) {
+	        if ($event.target.composing) { return; }
+	        _vm.config.adminUserName = $event.target.value
+	      }
+	    }
+	  })]), _vm._v(" "), _c('div', {
+	    staticClass: "field"
+	  }, [_c('label', [_vm._v("\n              " + _vm._s(_vm.$t("message.config_username")) + "\n            ")]), _vm._v(" "), (_vm.visible) ? _c('input', {
+	    directives: [{
+	      name: "model",
+	      rawName: "v-model",
+	      value: (_vm.config.adminUserName),
+	      expression: "config.adminUserName"
+	    }],
+	    attrs: {
+	      "type": "text",
+	      "placeholder": "HUE username"
+	    },
+	    domProps: {
+	      "value": _vm._s(_vm.config.adminUserName)
+	    },
+	    on: {
+	      "input": function($event) {
+	        if ($event.target.composing) { return; }
+	        _vm.config.adminUserName = $event.target.value
+	      }
+	    }
+	  }) : _vm._e(), _vm._v(" "), (!_vm.visible) ? _c('input', {
+	    directives: [{
+	      name: "model",
+	      rawName: "v-model",
+	      value: (_vm.config.adminPassword),
+	      expression: "config.adminPassword"
+	    }],
+	    attrs: {
+	      "type": "password",
+	      "placeholder": "HUE username"
+	    },
+	    domProps: {
+	      "value": _vm._s(_vm.config.adminPassword)
+	    },
+	    on: {
+	      "input": function($event) {
+	        if ($event.target.composing) { return; }
+	        _vm.config.adminPassword = $event.target.value
+	      }
+	    }
+	  }) : _vm._e()])])]), _vm._v(" "), _c('div', {
 	    staticClass: "ui two column row"
 	  }, [_c('div', {
 	    staticClass: "ui raised segment column"

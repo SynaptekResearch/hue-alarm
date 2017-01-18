@@ -17,6 +17,8 @@ type Config struct {
 	UserName                 string         `json:"userName"`
 	StatusMessages           StatusMessages `json:"statusMessages"`
 	NotificationDelaySeconds int            `json:"notificationDelaySeconds"`
+	AdminUserName            string         `json:"adminUserName"`
+	AdminPassword            string         `json:"adminPassword"`
 }
 
 type StatusMessages struct {
