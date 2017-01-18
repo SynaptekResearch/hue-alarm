@@ -3,52 +3,48 @@
   <div>
     <div class="one column row">
       <form class="ui form" v-if="config && config.statusMessages">
-        <div class="ui two column row">
-          <div class="ui raised segment column">
-            <a class="ui green ribbon label">{{ $t("message.config_administration") }}</a>
-            <span></span>
-            <p></p>
+        <div class="ui raised segment">
+          <a class="ui green ribbon label">{{ $t("message.config_administration") }}</a>
+          <span></span>
+          <p></p>
 
-            <div class="field">
-              <label>
-                {{ $t("message.config_admin_username") }}
-              </label>
-              <input type="text" v-model="config.adminUserName" placeholder="Keyword in schedule name">
-            </div>
-
-            <div class="field">
-              <label>
-                {{ $t("message.config_username") }}
-              </label>
-              <input v-if="visible" type="text" v-model="config.adminUserName" placeholder="HUE username">
-              <input v-if="!visible" type="password" v-model="config.adminPassword" placeholder="HUE username">
-            </div>
-
+          <div class="field">
+            <label>
+              {{ $t("message.config_admin_username") }}
+            </label>
+            <input type="text" v-model="config.adminUserName" placeholder="Admin username">
           </div>
+
+          <div class="field">
+            <label>
+              {{ $t("message.config_admin_password") }}
+            </label>
+            <input v-if="visible" type="text" v-model="config.adminUserName" placeholder="Admin password">
+            <input v-if="!visible" type="password" v-model="config.adminPassword" placeholder="Admin password">
+          </div>
+
         </div>
 
-        <div class="ui two column row">
-          <div class="ui raised segment column">
-            <a class="ui green ribbon label">{{ $t("message.config_activation") }}</a>
-            <span></span>
-            <p></p>
+        <div class="ui raised segment">
+          <a class="ui green ribbon label">{{ $t("message.config_activation") }}</a>
+          <span></span>
+          <p></p>
 
-            <div class="field">
-              <label>
-                {{ $t("message.config_part_of_schedule_name") }}
-              </label>
-              <input type="text" v-model="config.triggerOnSchedulePart" placeholder="Keyword in schedule name">
-            </div>
-
-            <div class="field">
-              <label>
-                {{ $t("message.config_username") }}
-              </label>
-              <input v-if="visible" type="text" v-model="config.userName" placeholder="HUE username">
-              <input v-if="!visible" type="password" v-model="config.userName" placeholder="HUE username">
-            </div>
-
+          <div class="field">
+            <label>
+              {{ $t("message.config_part_of_schedule_name") }}
+            </label>
+            <input type="text" v-model="config.triggerOnSchedulePart" placeholder="Keyword in schedule name">
           </div>
+
+          <div class="field">
+            <label>
+              {{ $t("message.config_username") }}
+            </label>
+            <input v-if="visible" type="text" v-model="config.userName" placeholder="HUE username">
+            <input v-if="!visible" type="password" v-model="config.userName" placeholder="HUE username">
+          </div>
+
         </div>
 
         <div class="ui raised segment">

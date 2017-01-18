@@ -19070,6 +19070,9 @@
 	          config_to: "TO email address",
 	          config_message: "Message",
 	          enabled: "Enabled",
+	          config_admin_password: "Admin password",
+	          config_admin_username: "Admin username",
+	          config_administration: "Administration"
 	        }
 	      },
 	      nl: {
@@ -19093,6 +19096,10 @@
 	          config_to: "TO email adres",
 	          config_message: "Informatie",
 	          enabled: "Enabled",
+	          config_admin_password: "Admin wachtwoord",
+	          config_admin_username: "Admin gebruikersnaam",
+	          config_administration: "Beheer"
+
 	        }
 	      }
 	    };
@@ -24155,10 +24162,6 @@
 	//
 	//
 	//
-	//
-	//
-	//
-	//
 
 	var Vue = __webpack_require__(1);
 	var api = __webpack_require__(11);
@@ -24220,9 +24223,7 @@
 	  }, [(_vm.config && _vm.config.statusMessages) ? _c('form', {
 	    staticClass: "ui form"
 	  }, [_c('div', {
-	    staticClass: "ui two column row"
-	  }, [_c('div', {
-	    staticClass: "ui raised segment column"
+	    staticClass: "ui raised segment"
 	  }, [_c('a', {
 	    staticClass: "ui green ribbon label"
 	  }, [_vm._v(_vm._s(_vm.$t("message.config_administration")))]), _vm._v(" "), _c('span'), _vm._v(" "), _c('p'), _vm._v(" "), _c('div', {
@@ -24236,7 +24237,7 @@
 	    }],
 	    attrs: {
 	      "type": "text",
-	      "placeholder": "Keyword in schedule name"
+	      "placeholder": "Admin username"
 	    },
 	    domProps: {
 	      "value": _vm._s(_vm.config.adminUserName)
@@ -24249,7 +24250,7 @@
 	    }
 	  })]), _vm._v(" "), _c('div', {
 	    staticClass: "field"
-	  }, [_c('label', [_vm._v("\n              " + _vm._s(_vm.$t("message.config_username")) + "\n            ")]), _vm._v(" "), (_vm.visible) ? _c('input', {
+	  }, [_c('label', [_vm._v("\n              " + _vm._s(_vm.$t("message.config_admin_password")) + "\n            ")]), _vm._v(" "), (_vm.visible) ? _c('input', {
 	    directives: [{
 	      name: "model",
 	      rawName: "v-model",
@@ -24258,7 +24259,7 @@
 	    }],
 	    attrs: {
 	      "type": "text",
-	      "placeholder": "HUE username"
+	      "placeholder": "Admin password"
 	    },
 	    domProps: {
 	      "value": _vm._s(_vm.config.adminUserName)
@@ -24278,7 +24279,7 @@
 	    }],
 	    attrs: {
 	      "type": "password",
-	      "placeholder": "HUE username"
+	      "placeholder": "Admin password"
 	    },
 	    domProps: {
 	      "value": _vm._s(_vm.config.adminPassword)
@@ -24289,10 +24290,8 @@
 	        _vm.config.adminPassword = $event.target.value
 	      }
 	    }
-	  }) : _vm._e()])])]), _vm._v(" "), _c('div', {
-	    staticClass: "ui two column row"
-	  }, [_c('div', {
-	    staticClass: "ui raised segment column"
+	  }) : _vm._e()])]), _vm._v(" "), _c('div', {
+	    staticClass: "ui raised segment"
 	  }, [_c('a', {
 	    staticClass: "ui green ribbon label"
 	  }, [_vm._v(_vm._s(_vm.$t("message.config_activation")))]), _vm._v(" "), _c('span'), _vm._v(" "), _c('p'), _vm._v(" "), _c('div', {
@@ -24359,7 +24358,7 @@
 	        _vm.config.userName = $event.target.value
 	      }
 	    }
-	  }) : _vm._e()])])]), _vm._v(" "), _c('div', {
+	  }) : _vm._e()])]), _vm._v(" "), _c('div', {
 	    staticClass: "ui raised segment"
 	  }, [_c('a', {
 	    staticClass: "ui green ribbon label"

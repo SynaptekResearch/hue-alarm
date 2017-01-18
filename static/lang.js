@@ -23,6 +23,9 @@ const locales = {
           config_to: "TO email address",
           config_message: "Message",
           enabled: "Enabled",
+          config_admin_password: "Admin password",
+          config_admin_username: "Admin username",
+          config_administration: "Administration"
         }
       },
       nl: {
@@ -46,6 +49,10 @@ const locales = {
           config_to: "TO email adres",
           config_message: "Informatie",
           enabled: "Enabled",
+          config_admin_password: "Admin wachtwoord",
+          config_admin_username: "Admin gebruikersnaam",
+          config_administration: "Beheer"
+
         }
       }
     };
