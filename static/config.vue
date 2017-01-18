@@ -6,25 +6,26 @@
         <div class="ui relaxed grid">
           <div class="ui row">
             <div class="ui segment six wide column">
-              <a class="ui green ribbon label">{{ $t("message.config_administration") }}</a>
-              <span></span>
-              <p></p>
+              <div class="ui segment">
+                <a class="ui green ribbon label">{{ $t("message.config_administration") }}</a>
+                <span></span>
+                <p></p>
 
-              <div class="field">
-                <label>
-                  {{ $t("message.config_admin_username") }}
-                </label>
-                <input type="text" v-model="config.adminUserName" placeholder="Admin username">
+                <div class="field">
+                  <label>
+                    {{ $t("message.config_admin_username") }}
+                  </label>
+                  <input type="text" v-model="config.adminUserName" placeholder="Admin username">
+                </div>
+
+                <div class="field">
+                  <label>
+                    {{ $t("message.config_admin_password") }}
+                  </label>
+                  <input v-if="visible" type="text" v-model="config.adminUserName" placeholder="Admin password">
+                  <input v-if="!visible" type="password" v-model="config.adminPassword" placeholder="Admin password">
+                </div>
               </div>
-
-              <div class="field">
-                <label>
-                  {{ $t("message.config_admin_password") }}
-                </label>
-                <input v-if="visible" type="text" v-model="config.adminUserName" placeholder="Admin password">
-                <input v-if="!visible" type="password" v-model="config.adminPassword" placeholder="Admin password">
-              </div>
-
             </div>
             <div class="ui one wide column">
             </div>

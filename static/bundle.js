@@ -24169,6 +24169,7 @@
 	//
 	//
 	//
+	//
 
 	var Vue = __webpack_require__(1);
 	var api = __webpack_require__(11);
@@ -24235,11 +24236,13 @@
 	    staticClass: "ui row"
 	  }, [_c('div', {
 	    staticClass: "ui segment six wide column"
+	  }, [_c('div', {
+	    staticClass: "ui segment"
 	  }, [_c('a', {
 	    staticClass: "ui green ribbon label"
 	  }, [_vm._v(_vm._s(_vm.$t("message.config_administration")))]), _vm._v(" "), _c('span'), _vm._v(" "), _c('p'), _vm._v(" "), _c('div', {
 	    staticClass: "field"
-	  }, [_c('label', [_vm._v("\n                " + _vm._s(_vm.$t("message.config_admin_username")) + "\n              ")]), _vm._v(" "), _c('input', {
+	  }, [_c('label', [_vm._v("\n                  " + _vm._s(_vm.$t("message.config_admin_username")) + "\n                ")]), _vm._v(" "), _c('input', {
 	    directives: [{
 	      name: "model",
 	      rawName: "v-model",
@@ -24261,7 +24264,7 @@
 	    }
 	  })]), _vm._v(" "), _c('div', {
 	    staticClass: "field"
-	  }, [_c('label', [_vm._v("\n                " + _vm._s(_vm.$t("message.config_admin_password")) + "\n              ")]), _vm._v(" "), (_vm.visible) ? _c('input', {
+	  }, [_c('label', [_vm._v("\n                  " + _vm._s(_vm.$t("message.config_admin_password")) + "\n                ")]), _vm._v(" "), (_vm.visible) ? _c('input', {
 	    directives: [{
 	      name: "model",
 	      rawName: "v-model",
@@ -24301,7 +24304,7 @@
 	        _vm.config.adminPassword = $event.target.value
 	      }
 	    }
-	  }) : _vm._e()])]), _vm._v(" "), _c('div', {
+	  }) : _vm._e()])])]), _vm._v(" "), _c('div', {
 	    staticClass: "ui one wide column"
 	  }), _vm._v(" "), _c('div', {
 	    staticClass: "ui segment nine wide column"
