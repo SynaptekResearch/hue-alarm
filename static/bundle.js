@@ -24170,6 +24170,11 @@
 	//
 	//
 	//
+	//
+	//
+	//
+	//
+	//
 
 	var Vue = __webpack_require__(1);
 	var api = __webpack_require__(11);
@@ -24235,7 +24240,7 @@
 	  }, [_c('div', {
 	    staticClass: "ui row"
 	  }, [_c('div', {
-	    staticClass: "ui segment six wide column"
+	    staticClass: "ui eight wide column"
 	  }, [_c('div', {
 	    staticClass: "ui segment"
 	  }, [_c('a', {
@@ -24305,14 +24310,14 @@
 	      }
 	    }
 	  }) : _vm._e()])])]), _vm._v(" "), _c('div', {
-	    staticClass: "ui one wide column"
-	  }), _vm._v(" "), _c('div', {
-	    staticClass: "ui segment nine wide column"
+	    staticClass: "ui eight wide column"
+	  }, [_c('div', {
+	    staticClass: "ui segment"
 	  }, [_c('a', {
 	    staticClass: "ui green ribbon label"
 	  }, [_vm._v(_vm._s(_vm.$t("message.config_activation")))]), _vm._v(" "), _c('span'), _vm._v(" "), _c('p'), _vm._v(" "), _c('div', {
 	    staticClass: "field"
-	  }, [_c('label', [_vm._v("\n                " + _vm._s(_vm.$t("message.config_part_of_schedule_name")) + "\n              ")]), _vm._v(" "), _c('input', {
+	  }, [_c('label', [_vm._v("\n                  " + _vm._s(_vm.$t("message.config_part_of_schedule_name")) + "\n                ")]), _vm._v(" "), _c('input', {
 	    directives: [{
 	      name: "model",
 	      rawName: "v-model",
@@ -24334,7 +24339,7 @@
 	    }
 	  })]), _vm._v(" "), _c('div', {
 	    staticClass: "field"
-	  }, [_c('label', [_vm._v("\n                " + _vm._s(_vm.$t("message.config_username")) + "\n              ")]), _vm._v(" "), (_vm.visible) ? _c('input', {
+	  }, [_c('label', [_vm._v("\n                  " + _vm._s(_vm.$t("message.config_username")) + "\n                ")]), _vm._v(" "), (_vm.visible) ? _c('input', {
 	    directives: [{
 	      name: "model",
 	      rawName: "v-model",
@@ -24374,15 +24379,17 @@
 	        _vm.config.userName = $event.target.value
 	      }
 	    }
-	  }) : _vm._e()])])]), _vm._v(" "), _c('div', {
+	  }) : _vm._e()])])])]), _vm._v(" "), _c('div', {
 	    staticClass: "ui row"
 	  }, [_c('div', {
-	    staticClass: "ui raised segment  sixteen wide column"
+	    staticClass: "ui sixteen wide column"
+	  }, [_c('div', {
+	    staticClass: "ui segment"
 	  }, [_c('a', {
 	    staticClass: "ui green ribbon label"
 	  }, [_vm._v(_vm._s(_vm.$t("message.config_primary_notification_settings")))]), _vm._v(" "), _c('span'), _vm._v(" "), _c('p'), _vm._v(" "), _c('div', {
 	    staticClass: "field"
-	  }, [_c('label', [_vm._v("\n                " + _vm._s(_vm.$t("message.config_primary_notification_url")) + "\n              ")]), _vm._v(" "), (_vm.visible) ? _c('input', {
+	  }, [_c('label', [_vm._v("\n                  " + _vm._s(_vm.$t("message.config_primary_notification_url")) + "\n                ")]), _vm._v(" "), (_vm.visible) ? _c('input', {
 	    directives: [{
 	      name: "model",
 	      rawName: "v-model",
@@ -24423,7 +24430,7 @@
 	    }
 	  }) : _vm._e()]), _vm._v(" "), _c('div', {
 	    staticClass: "field"
-	  }, [_c('label', [_vm._v("\n                " + _vm._s(_vm.$t("message.config_primary_notification_speed")) + "\n              ")]), _vm._v(" "), _c('input', {
+	  }, [_c('label', [_vm._v("\n                  " + _vm._s(_vm.$t("message.config_primary_notification_speed")) + "\n                ")]), _vm._v(" "), _c('input', {
 	    directives: [{
 	      name: "model",
 	      rawName: "v-model.number",
@@ -24450,7 +24457,7 @@
 	    }
 	  })]), _vm._v(" "), _c('div', {
 	    staticClass: "field"
-	  }, [_c('label', [_vm._v("\n                " + _vm._s(_vm.$t("message.config_primary_notification_test_mode")) + "\n              ")]), _vm._v(" "), _c('input', {
+	  }, [_c('label', [_vm._v("\n                  " + _vm._s(_vm.$t("message.config_primary_notification_test_mode")) + "\n                ")]), _vm._v(" "), _c('input', {
 	    directives: [{
 	      name: "model",
 	      rawName: "v-model",
@@ -24491,15 +24498,17 @@
 	        _vm.testnotification($event)
 	      }
 	    }
-	  }, [_vm._v(_vm._s(_vm.$t("message.config_primary_notification_test")))])])])]), _vm._v(" "), _c('div', {
+	  }, [_vm._v(_vm._s(_vm.$t("message.config_primary_notification_test")))])])])])]), _vm._v(" "), _c('div', {
 	    staticClass: "ui row"
 	  }, [_c('div', {
-	    staticClass: "ui raised segment sixteen wide column"
+	    staticClass: "ui sixteen wide column"
+	  }, [_c('div', {
+	    staticClass: "ui segment"
 	  }, [_c('a', {
 	    staticClass: "ui green ribbon label"
 	  }, [_vm._v(_vm._s(_vm.$t('message.config_secondary_notification_settings')))]), _vm._v(" "), _c('span'), _vm._v(" "), _c('p'), _vm._v(" "), _c('div', {
 	    staticClass: "field"
-	  }, [_c('label', [_vm._v("\n                " + _vm._s(_vm.$t('message.enabled')) + "\n              ")]), _vm._v(" "), _c('input', {
+	  }, [_c('label', [_vm._v("\n                  " + _vm._s(_vm.$t('message.enabled')) + "\n                ")]), _vm._v(" "), _c('input', {
 	    directives: [{
 	      name: "model",
 	      rawName: "v-model",
@@ -24532,7 +24541,7 @@
 	    }
 	  })]), _vm._v(" "), _c('div', {
 	    staticClass: "field"
-	  }, [_c('label', [_vm._v("\n                " + _vm._s(_vm.$t('message.config_from')) + "\n              ")]), _vm._v(" "), (_vm.visible) ? _c('input', {
+	  }, [_c('label', [_vm._v("\n                  " + _vm._s(_vm.$t('message.config_from')) + "\n                ")]), _vm._v(" "), (_vm.visible) ? _c('input', {
 	    directives: [{
 	      name: "model",
 	      rawName: "v-model",
@@ -24573,7 +24582,7 @@
 	    }
 	  }) : _vm._e()]), _vm._v(" "), _c('div', {
 	    staticClass: "field"
-	  }, [_c('label', [_vm._v("\n                " + _vm._s(_vm.$t('message.config_to')) + "\n              ")]), _vm._v(" "), (_vm.visible) ? _c('input', {
+	  }, [_c('label', [_vm._v("\n                  " + _vm._s(_vm.$t('message.config_to')) + "\n                ")]), _vm._v(" "), (_vm.visible) ? _c('input', {
 	    directives: [{
 	      name: "model",
 	      rawName: "v-model",
@@ -24614,7 +24623,7 @@
 	    }
 	  }) : _vm._e()]), _vm._v(" "), _c('div', {
 	    staticClass: "field"
-	  }, [_c('label', [_vm._v("\n                " + _vm._s(_vm.$t('message.config_smtp_server_name')) + " \n              ")]), _vm._v(" "), _c('input', {
+	  }, [_c('label', [_vm._v("\n                  " + _vm._s(_vm.$t('message.config_smtp_server_name')) + " \n                ")]), _vm._v(" "), _c('input', {
 	    directives: [{
 	      name: "model",
 	      rawName: "v-model",
@@ -24635,7 +24644,7 @@
 	    }
 	  })]), _vm._v(" "), _c('div', {
 	    staticClass: "field"
-	  }, [_c('label', [_vm._v("\n                " + _vm._s(_vm.$t('message.config_smtp_port')) + " \n              ")]), _vm._v(" "), _c('input', {
+	  }, [_c('label', [_vm._v("\n                  " + _vm._s(_vm.$t('message.config_smtp_port')) + " \n                ")]), _vm._v(" "), _c('input', {
 	    directives: [{
 	      name: "model",
 	      rawName: "v-model.number",
@@ -24662,7 +24671,7 @@
 	    }
 	  })]), _vm._v(" "), _c('div', {
 	    staticClass: "field"
-	  }, [_c('label', [_vm._v("\n                " + _vm._s(_vm.$t('message.config_smtp_password')) + " \n              ")]), _vm._v(" "), (_vm.visible) ? _c('input', {
+	  }, [_c('label', [_vm._v("\n                  " + _vm._s(_vm.$t('message.config_smtp_password')) + " \n                ")]), _vm._v(" "), (_vm.visible) ? _c('input', {
 	    directives: [{
 	      name: "model",
 	      rawName: "v-model",
@@ -24729,7 +24738,7 @@
 	    staticClass: "ui info message"
 	  }, [_c('div', {
 	    staticClass: "header"
-	  }, [_vm._v("\n                " + _vm._s(_vm.$t('message.config_message')) + " \n              ")]), _vm._v(" "), _c('p', [_vm._v(_vm._s(_vm.message))])]) : _vm._e()])])])]) : _vm._e()])])
+	  }, [_vm._v("\n                  " + _vm._s(_vm.$t('message.config_message')) + " \n                ")]), _vm._v(" "), _c('p', [_vm._v(_vm._s(_vm.message))])]) : _vm._e()])])])])]) : _vm._e()])])
 	},staticRenderFns: []}
 	module.exports.render._withStripped = true
 	if (false) {
