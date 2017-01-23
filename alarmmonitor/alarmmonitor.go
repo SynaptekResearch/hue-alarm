@@ -5,6 +5,7 @@ import (
 	"flag"
 	"fmt"
 	"os"
+	"os/signal"
 	"strings"
 	"time"
 
@@ -37,6 +38,7 @@ type AlarmMonitor struct {
 	tripped      bool
 	alarmEnabled bool
 	reload       bool
+	kill         bool
 }
 
 // New constructs a new AlarmMonitor.
@@ -159,9 +161,22 @@ func (m *AlarmMonitor) Close() {
 
 // Run the main loop.
 func (m *AlarmMonitor) Run() {
+
+	m.kill = false
+	go func() {
+		sigchan := make(chan os.Signal, 10)
+		signal.Notify(sigchan, os.Interrupt)
+		<-sigchan
+		fmt.Printf("Shutting down.")
+		m.kill = true
+	}()
+
 	m.Running = true
 	defer m.Close()
 	for {
+		if m.kill {
+			break
+		}
 		log.Info.Printf("New run [testMode: %t]\n", m.Config.TestMode)
 
 		p, err := portal.GetPortal()
@@ -213,7 +228,7 @@ func (m *AlarmMonitor) Run() {
 		log.Info.Printf("Alarm enabled %t\n", m.alarmEnabled)
 		m.tripped = false
 
-		for run := 0; m.alarmEnabled && run < m.runs && !m.reload; run++ {
+		for run := 0; !m.kill && m.alarmEnabled && run < m.runs && !m.reload; run++ {
 			s, err := snsrs.GetAllSensors()
 			if err != nil {
 				log.Info.Printf("Error: %s\n", err)
