@@ -63,7 +63,7 @@
 /******/ 	__webpack_require__.p = "";
 
 /******/ 	// Load entry module and return exports
-/******/ 	return __webpack_require__(__webpack_require__.s = 41);
+/******/ 	return __webpack_require__(__webpack_require__.s = 42);
 /******/ })
 /************************************************************************/
 /******/ ([
@@ -9449,18 +9449,21 @@ module.exports = function bind(fn, thisArg) {
 
 /***/ }),
 /* 9 */
-/***/ (function(module, exports, __webpack_require__) {
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
 
+"use strict";
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "a", function() { return API; });
 var axios = __webpack_require__(14);
 
 
-module.exports = axios.create({
+var API = axios.create({
   timeout: 5000,
   headers: {
     'Pragma': 'no-cache',
     'Cache-Control': 'no-cache'
   }
 });
+
 
 /***/ }),
 /* 10 */
@@ -19715,8 +19718,10 @@ legacyLoad:"onTabLoad has been renamed to onLoad in 2.0. Please adjust your code
 
 /***/ }),
 /* 12 */
-/***/ (function(module, exports, __webpack_require__) {
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
 
+"use strict";
+/* harmony export (immutable) */ __webpack_exports__["a"] = activateLanguage;
 var Vue = __webpack_require__(1);
 var VueI18n = __webpack_require__(34);
 
@@ -19776,37 +19781,40 @@ const locales = {
       }
     };
 
-Vue.use(VueI18n);
-Vue.config.lang = 'en';
+function activateLanguage() {
+  Vue.use(VueI18n);
+  Vue.config.lang = 'en';
 
-Object.keys(locales).forEach(function (lang) {
-  Vue.locale(lang, locales[lang])
-});
-
-
+  Object.keys(locales).forEach(function (lang) {
+    Vue.locale(lang, locales[lang])
+  });
+}
 
 /***/ }),
 /* 13 */
-/***/ (function(module, exports, __webpack_require__) {
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
 
+"use strict";
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__home_vue__ = __webpack_require__(36);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__home_vue___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_0__home_vue__);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__config_vue__ = __webpack_require__(35);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__config_vue___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_1__config_vue__);
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "a", function() { return Router; });
 
 var Vue = __webpack_require__(1);
 var VueRouter = __webpack_require__(39);
-var Home = __webpack_require__(36);
-var Config = __webpack_require__(35);
+
+
 
 
 Vue.use(VueRouter);
 
-const routes = [
-  {'path':'/', 'component': Home},
-  {'path':'/config', 'component': Config}
-];
-
-module.exports = new VueRouter({
-  'routes': routes 
+var Router = new VueRouter({
+  'routes': [
+    { 'path': '/', 'component': __WEBPACK_IMPORTED_MODULE_0__home_vue___default.a },
+    { 'path': '/config', 'component': __WEBPACK_IMPORTED_MODULE_1__config_vue___default.a }
+  ]
 });
-
 
 
 /***/ }),
@@ -20652,8 +20660,13 @@ module.exports = function spread(callback) {
 
 /***/ }),
 /* 32 */
-/***/ (function(module, exports, __webpack_require__) {
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
 
+"use strict";
+Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_vue__ = __webpack_require__(1);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_vue___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_0_vue__);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__api__ = __webpack_require__(9);
 //
 //
 //
@@ -20818,8 +20831,8 @@ module.exports = function spread(callback) {
 //
 //
 
-var Vue = __webpack_require__(1);
-var api = __webpack_require__(9);
+
+
 
 var data = {
   config: {
@@ -20829,43 +20842,46 @@ var data = {
   visible: false
 };
 
-// Configuration screen
-module.exports = Vue.component('configuration', {
-  data: function () {
+/* harmony default export */ __webpack_exports__["default"] = {
+  name: 'configuration',
+  data: () => {
     return data;
   },
-  created: function () {
-    api.get('/api/config').then(function (response) {
+  created: () => {
+    __WEBPACK_IMPORTED_MODULE_1__api__["a" /* API */].get('/api/config').then(function (response) {
       data.config = response.data;
     }).catch(function (err) {
       console.log("Error accessing resource", err);
     });
   },
   methods: {
-    toggleVisible: function () {
+    toggleVisible: () => {
       data.visible = !data.visible;
     },
-    testnotification: function () {
-      api.post('/api/test-notify', {
+    testnotification: () => {
+      __WEBPACK_IMPORTED_MODULE_1__api__["a" /* API */].post('/api/test-notify', {
         URL: data.config.notificationURL
       }).then(function (response) {
         data.message = response.data;
       });
     },
-    saveSettings: function () {
-      api.post('/api/config', data.config).then(function (response) {
+    saveSettings: () => {
+      __WEBPACK_IMPORTED_MODULE_1__api__["a" /* API */].post('/api/config', data.config).then(function (response) {
         data.message = response.data;
       });
     }
   }
-});
+};
 
 /***/ }),
 /* 33 */
-/***/ (function(module, exports, __webpack_require__) {
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
 
-//
-//
+"use strict";
+Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_vue__ = __webpack_require__(1);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_vue___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_0_vue__);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__api__ = __webpack_require__(9);
 //
 //
 //
@@ -20900,8 +20916,8 @@ module.exports = Vue.component('configuration', {
 //
 //
 
-var Vue = __webpack_require__(1);
-var api = __webpack_require__(9);
+
+
 
 var homeData = {
   status: null,
@@ -20911,21 +20927,22 @@ var homeData = {
 var timerId;
 
 // Home screen
-module.exports = Vue.component('home', {
-  data: function () {
+/* harmony default export */ __webpack_exports__["default"] = {
+  name: 'home',
+  data: () => {
     return homeData;
   },
   beforeMount: function () {
     this.update();
     timerId = setInterval(this.update, 5000);
   },
-  beforeDestroy: function () {
+  beforeDestroy: () => {
     clearInterval(timerId);
   },
   methods: {
-    update: function () {
+    update: () => {
       homeData.loading = true;
-      api.get('/api/status').then(function (response) {
+      __WEBPACK_IMPORTED_MODULE_1__api__["a" /* API */].get('/api/status').then(function (response) {
         homeData.status = response.data;
         homeData.loading = false;
       }).catch(function (err) {
@@ -20934,7 +20951,7 @@ module.exports = Vue.component('home', {
       });
     }
   }
-});
+};
 
 /***/ }),
 /* 34 */
@@ -22624,7 +22641,9 @@ if (false) {
 /***/ (function(module, exports, __webpack_require__) {
 
 module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c=_vm._self._c||_h;
-  return _c('div', [_c('div', {
+  return _c('div', {
+    staticClass: "home"
+  }, [_c('div', {
     staticClass: "ui one column row"
   }, [_c('div', {
     staticClass: "ui raised segment column"
@@ -24774,22 +24793,35 @@ module.exports = g;
 
 
 /***/ }),
-/* 41 */
-/***/ (function(module, exports, __webpack_require__) {
+/* 41 */,
+/* 42 */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_vue__ = __webpack_require__(1);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_vue___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_0_vue__);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__lang__ = __webpack_require__(12);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__routing__ = __webpack_require__(13);
 
 
-var Vue = __webpack_require__(1);
 
+// dude, serious?
 var $ = __webpack_require__(10);
 window.jQuery=$;
+// ...because aliens
 var semantic = __webpack_require__(11);
 
-__webpack_require__(12);
-var router = __webpack_require__(13);
+
+
+
+console.log("Router is %o", __WEBPACK_IMPORTED_MODULE_2__routing__["a" /* Router */]);
+
+__webpack_require__.i(__WEBPACK_IMPORTED_MODULE_1__lang__["a" /* activateLanguage */])();
 
 // Main application
-var app = new Vue({
-  router,
+var app = new __WEBPACK_IMPORTED_MODULE_0_vue___default.a({
+  router: __WEBPACK_IMPORTED_MODULE_2__routing__["a" /* Router */],
   el: '#app'
 });
 

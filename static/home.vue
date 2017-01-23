@@ -1,5 +1,5 @@
 <template>
-  <div>
+  <div class="home">
     <div class="ui one column row">
       <div class="ui raised segment column">
         <a class="ui green ribbon label">Status</a>
@@ -29,13 +29,11 @@
       </div>
     </div>
   </div>
-
 </template>
 
-
 <script>
-var Vue = require('vue');
-var api = require('./api');
+import Vue from 'vue';
+import { API } from './api';
 
 var homeData = {
   status: null,
@@ -45,21 +43,22 @@ var homeData = {
 var timerId;
 
 // Home screen
-module.exports = Vue.component('home', {
-  data: function() {
+export default {
+  name: 'home',
+  data: () => {
     return homeData;
   },
-  beforeMount: function() {
+  beforeMount: function()  {
     this.update();
     timerId = setInterval(this.update,5000);
   },
-  beforeDestroy: function() {
+  beforeDestroy: () => {
     clearInterval(timerId);
   },
   methods: {
-    update: function() {
+    update: () =>  {
         homeData.loading = true;
-        api
+        API
           .get('/api/status')
           .then(function (response) {
             homeData.status = response.data;
@@ -71,6 +70,6 @@ module.exports = Vue.component('home', {
           });
       }
   }
-});
+};
 
 </script>

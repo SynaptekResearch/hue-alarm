@@ -10,17 +10,18 @@
   "license": "ISC",
   "dependencies": {
     "axios": "^0.15.3",
+    "babel-loader": "^6.2.10",
     "jquery": "^3.1.1",
     "semantic-ui": "^2.2.7",
     "vue": "2.1.8",
     "vue-i18n": "^4.10.0",
-    "vue-router": "^2.1.1"
-  },
-  "devDependencies": {
+    "vue-router": "^2.1.1",
     "css-loader": "^0.26.1",
     "style-loader": "^0.13.1",
     "vue-loader": "^10.0.2",
     "vue-template-compiler": "2.1.8",
     "webpack": "^2.2.0"
+  },
+  "devDependencies": {
   }
 }

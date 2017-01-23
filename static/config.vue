@@ -162,8 +162,8 @@
 </template>
 
 <script>
-var Vue = require('vue');
-var api = require('./api');
+import Vue from 'vue';
+import { API } from './api';
 
 var data = {
   config: {
@@ -173,13 +173,13 @@ var data = {
   visible: false
 };
 
-// Configuration screen
-module.exports = Vue.component('configuration', {
-  data: function() {
+export default {
+  name: 'configuration',
+  data: () => {
     return data;
   },
-  created: function () {
-    api
+  created: () => {
+    API
       .get('/api/config')
       .then(function (response) {
         data.config = response.data;
@@ -189,11 +189,11 @@ module.exports = Vue.component('configuration', {
       });
   },
   methods: {
-    toggleVisible: function() {
+    toggleVisible: () => {
       data.visible=!data.visible;
     },
-    testnotification: function() {
-      api
+    testnotification: () => {
+      API
         .post('/api/test-notify', {
           URL: data.config.notificationURL
         })
@@ -201,13 +201,14 @@ module.exports = Vue.component('configuration', {
           data.message = response.data;
         });
     },
-    saveSettings: function() {
-      api
+    saveSettings: () => {
+      API
         .post('/api/config', data.config)
         .then(function (response) {
           data.message = response.data;
         });
     }
   }
-});
+};
+
 </script>

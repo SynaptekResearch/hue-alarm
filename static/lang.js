@@ -57,10 +57,11 @@ const locales = {
       }
     };
 
-Vue.use(VueI18n);
-Vue.config.lang = 'en';
+export function activateLanguage() {
+  Vue.use(VueI18n);
+  Vue.config.lang = 'en';
 
-Object.keys(locales).forEach(function (lang) {
-  Vue.locale(lang, locales[lang])
-});
-
+  Object.keys(locales).forEach(function (lang) {
+    Vue.locale(lang, locales[lang])
+  });
+}

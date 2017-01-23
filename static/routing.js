@@ -1,18 +1,15 @@
 
 var Vue = require('vue');
 var VueRouter = require('vue-router');
-var Home = require('./home.vue');
-var Config = require('./config.vue');
 
+import Home from './home.vue';
+import Configuration from './config.vue';
 
 Vue.use(VueRouter);
 
-const routes = [
-  {'path':'/', 'component': Home},
-  {'path':'/config', 'component': Config}
-];
-
-module.exports = new VueRouter({
-  'routes': routes 
+export var Router = new VueRouter({
+  'routes': [
+    { 'path': '/', 'component': Home },
+    { 'path': '/config', 'component': Configuration }
+  ]
 });
-

@@ -1,16 +1,22 @@
 
-var Vue = require('vue');
+import Vue from 'vue';
 
+// dude, serious?
 var $ = require('jquery');
 window.jQuery=$;
+// ...because aliens
 var semantic = require('semantic-ui/dist/semantic.min');
 
-require('./lang');
-var router = require('./routing');
+import { activateLanguage } from './lang';
+import { Router } from './routing';
+
+console.log("Router is %o", Router);
+
+activateLanguage();
 
 // Main application
 var app = new Vue({
-  router,
+  router: Router,
   el: '#app'
 });
 

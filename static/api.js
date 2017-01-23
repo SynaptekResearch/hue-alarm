@@ -1,7 +1,7 @@
 var axios = require('axios');
 
 
-module.exports = axios.create({
+export var API = axios.create({
   timeout: 5000,
   headers: {
     'Pragma': 'no-cache',
